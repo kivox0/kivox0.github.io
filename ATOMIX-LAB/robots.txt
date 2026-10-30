@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: когда появится домен, раскомментировать и указать его:
+# Sitemap: https://ДОМЕН/sitemap.xml
