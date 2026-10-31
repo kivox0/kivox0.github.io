@@ -5149,24 +5149,9 @@ function renderIonic(res) {
   return h;
 }
 
-/* ---------- открытие раздела ---------- */
-const openBtn = $("eq-open"), section = $("eq");
+/* ---------- раздел открыт всегда, без кнопки «Составить / Скрыть» ---------- */
+const section = $("eq");
 let tab = "manual";
-function setOpen(on) {
-  section.hidden = !on;
-  openBtn.setAttribute("aria-expanded", on ? "true" : "false");
-  openBtn.querySelector("span").textContent = openLabel();
-  if (on) {
-    section.scrollIntoView({ behavior: smooth(), block: "start" });
-    if (tab === "manual") input.focus({ preventScroll: true });
-    else setPicking(true);
-  } else {
-    setPicking(false);
-    closeSugg();
-  }
-}
-openBtn.addEventListener("click", function () { setOpen(section.hidden); });
-function openLabel() { return section.hidden ? tr("Составить химическое уравнение", "Build a chemical equation") : tr("Скрыть составитель уравнений", "Hide the equation builder"); }
 function dbNote() {
   const nr = chem.reactions.length, ns = chem.substanceCount;
   $("eq-db-note").textContent = tr(
@@ -5552,7 +5537,6 @@ syncPicked();
 
 /* ---------- смена языка: всё, что уже на экране, рисуется заново ---------- */
 I18N.on(function () {
-  openBtn.querySelector("span").textContent = openLabel();
   dbNote();
   closeSugg();
   updatePreview();
